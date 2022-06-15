@@ -1,0 +1,35 @@
+<ion-content>
+  <div *ngFor="let cat of dados">
+    <div class="categoria">
+      <img src="{{cat.foto}}" alt="">
+      <h2>{{cat.nome}}</h2>
+    </div>
+    <ion-list>
+      <ion-item *ngFor="let prod of cat.produtos" (click)="salvarProduto(prod)" routerLink="/detalhe">
+        <ion-avatar slot="start">
+          <img src="{{prod.foto || 'https://via.placeholder.com/150'}}" alt="">
+        </ion-avatar>
+        <ion-label>
+          <h2>{{prod.nome}}</h2>
+          <p>{{prod.descricao}}</p>
+          <p><b>{{prod.valor | currency:'BRL'}}</b></p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div class="fix"></div>
+
+  <footer *ngIf="carrinho.length > 0" routerLink="/carrinho">
+    <div>
+      <ion-icon name="cart-outline"></ion-icon>
+      <ion-badge>{{carrinho.length}}</ion-badge>
+    </div>
+    <div>
+      <h4> Meu Pedido</h4>
+    </div>
+    <div>
+      <p>{{ totalCarrinho | currency: 'BRL'}}</p>
+    </div>
+  </footer>
+</ion-content>
